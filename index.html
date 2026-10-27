@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A simple student planner to organize tasks, study sessions, and exams.">
+  <title>Smart Student Planner</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand"><span class="brand-icon">✦</span><span>StudySpace</span></div>
+      <p class="nav-label">WORKSPACE</p>
+      <nav>
+        <a class="nav-item active" href="#dashboard">▦ <span>Dashboard</span></a>
+        <a class="nav-item" href="#tasks">☑ <span>My Tasks</span></a>
+        <a class="nav-item" href="#schedule">▦ <span>Study Schedule</span></a>
+        <a class="nav-item" href="#exams">◇ <span>Exams & Deadlines</span></a>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="tip-card">
+          <span class="tip-emoji">💡</span>
+          <strong>Study tip</strong>
+          <p>Small, focused study sessions can make big goals feel easier.</p>
+        </div>
+        <p class="sidebar-foot">Student Planner · Demo</p>
+      </div>
+    </aside>
+
+    <main class="main-content" id="dashboard">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow" id="today-label">YOUR STUDY SPACE</p>
+          <h1>Good morning! <span class="wave">✦</span></h1>
+          <p class="subheading">Plan your day, one task at a time.</p>
+        </div>
+        <div class="profile">
+          <div class="avatar">S</div>
+          <div><strong>Student</strong><small>My workspace</small></div>
+        </div>
+      </header>
+
+      <section class="stats-grid" aria-label="Study overview">
+        <article class="stat-card">
+          <div class="stat-top"><span>Tasks completed</span><span class="stat-icon lilac">✓</span></div>
+          <div class="stat-number" id="completed-count">0</div>
+          <p class="stat-note">Keep up the great work</p>
+        </article>
+        <article class="stat-card">
+          <div class="stat-top"><span>Tasks remaining</span><span class="stat-icon peach">☷</span></div>
+          <div class="stat-number" id="remaining-count">0</div>
+          <p class="stat-note">One step at a time</p>
+        </article>
+        <article class="stat-card">
+          <div class="stat-top"><span>Upcoming exams</span><span class="stat-icon mint">◇</span></div>
+          <div class="stat-number" id="exam-count">0</div>
+          <p class="stat-note">Stay ready and confident</p>
+        </article>
+      </section>
+
+      <div class="content-grid">
+        <section class="panel tasks-panel" id="tasks">
+          <div class="panel-heading">
+            <div><p class="eyebrow">STAY ORGANIZED</p><h2>My tasks</h2></div>
+            <button class="primary-btn" id="open-task-form">＋ Add task</button>
+          </div>
+          <form id="task-form" class="task-form hidden">
+            <label for="task-title">Task name</label>
+            <input id="task-title" type="text" placeholder="e.g. Review algebra notes" maxlength="100" required>
+            <div class="form-row">
+              <div><label for="task-subject">Subject</label><input id="task-subject" type="text" placeholder="Mathematics" maxlength="40"></div>
+              <div><label for="task-date">Due date</label><input id="task-date" type="date"></div>
+            </div>
+            <div class="form-actions"><button class="secondary-btn" type="button" id="cancel-task">Cancel</button><button class="primary-btn" type="submit">Save task</button></div>
+          </form>
+          <div class="task-filters" role="group" aria-label="Filter tasks">
+            <button class="filter-btn active" data-filter="all">All tasks</button>
+            <button class="filter-btn" data-filter="active">To do</button>
+            <button class="filter-btn" data-filter="done">Completed</button>
+          </div>
+          <div id="task-list" class="task-list"></div>
+          <p id="empty-tasks" class="empty-state hidden">No tasks here yet. Add a task to get started! ✨</p>
+        </section>
+
+        <section class="panel schedule-panel" id="schedule">
+          <div class="panel-heading">
+            <div><p class="eyebrow">MAKE TIME FOR LEARNING</p><h2>Study schedule</h2></div>
+          </div>
+          <form id="schedule-form" class="compact-form">
+            <input id="schedule-time" type="time" aria-label="Study time" required>
+            <input id="schedule-subject" type="text" placeholder="Subject or activity" aria-label="Subject or activity" maxlength="60" required>
+            <button class="icon-btn" type="submit" aria-label="Add schedule item">＋</button>
+          </form>
+          <div id="schedule-list" class="schedule-list"></div>
+          <p class="small-note">Your schedule is saved in this browser.</p>
+        </section>
+
+        <section class="panel exams-panel" id="exams">
+          <div class="panel-heading">
+            <div><p class="eyebrow">PLAN AHEAD</p><h2>Exams & deadlines</h2></div>
+          </div>
+          <form id="exam-form" class="exam-form">
+            <input id="exam-title" type="text" placeholder="Exam or deadline name" aria-label="Exam or deadline name" maxlength="80" required>
+            <div class="form-row">
+              <input id="exam-subject" type="text" placeholder="Subject" aria-label="Subject" maxlength="40">
+              <input id="exam-date" type="date" aria-label="Exam date" required>
+            </div>
+            <button class="primary-btn full-btn" type="submit">＋ Add deadline</button>
+          </form>
+          <div id="exam-list" class="exam-list"></div>
+        </section>
+
+        <section class="panel progress-panel">
+          <div class="panel-heading"><div><p class="eyebrow">YOUR MOMENTUM</p><h2>Task progress</h2></div></div>
+          <div class="progress-ring-wrap">
+            <div class="progress-ring" id="progress-ring"><div class="progress-inner"><strong id="progress-percent">0%</strong><span>completed</span></div></div>
+          </div>
+          <p class="progress-message" id="progress-message">Start with one small task. You’ve got this!</p>
+        </section>
+      </div>
+      <footer>Made for students, with focus and care <span>✦</span> <br><small>Demo project · Data is stored locally in your browser, not in a cloud database.</small></footer>
+    </main>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
